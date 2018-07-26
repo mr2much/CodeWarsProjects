@@ -22,9 +22,9 @@ Example:
 public class ArrayKataTest {
     @Test
     public void testMissingLetter() {
-        assertEquals('e', ArrayKata.findMissingLetter(new char[] {'a', 'b', 'c', 'd', 'f'}));
-        assertEquals('P', ArrayKata.findMissingLetter(new char[] {'O', 'Q', 'R', 'S'}));
-        assertEquals('y', ArrayKata.findMissingLetter(new char[] {'w', 'x', 'z'}));
-        assertEquals('H', ArrayKata.findMissingLetter(new char[] {'G', 'I', 'J'}));
+        assertEquals('e', ArrayKata.findMissingLetter(new char[] {'a', 'b', 'c', 'd', 'f'}, 0));
+        assertEquals('P', ArrayKata.findMissingLetter(new char[] {'O', 'Q', 'R', 'S'}, 0));
+        assertEquals('y', ArrayKata.findMissingLetter(new char[] {'w', 'x', 'z'}, 0));
+        assertEquals('H', ArrayKata.findMissingLetter(new char[] {'G', 'I', 'J'}, 0));
     }
 }

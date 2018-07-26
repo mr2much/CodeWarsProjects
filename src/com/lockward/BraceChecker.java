@@ -12,6 +12,7 @@ public class BraceChecker {
     private Stack<Character> braces;
 
     public BraceChecker() {
+        braces = new Stack<>();
         validBraces = new HashMap<>();
         validBraces.put('(', ')');
         validBraces.put('[', ']');
@@ -19,23 +20,29 @@ public class BraceChecker {
     }
 
     public boolean isValid(String input) {
-        braces = new Stack<>();
-
         for (char c : input.toCharArray()) {
             if (braces.size() > 0 && !validBraces.containsKey(c)) {
-                if (isClosing(braces.peek(), c)) {
-                    braces.pop();
+                if (checkIfCharacterIsMatchingClosingBrace(c)) {
+                    removeOpeningBraceFromTheStack();
                 }
             } else {
-                braces.push(c);
+                addOpeningBraceToTheStack(c);
             }
         }
 
         return braces.isEmpty();
     }
 
-    private boolean isClosing(char openingBrace, char closingBrace) {
-        System.out.println("Comparing: " + openingBrace + "\t" + closingBrace);
+    private boolean checkIfCharacterIsMatchingClosingBrace(char closingBrace) {
+        char openingBrace = braces.peek();
         return validBraces.get(openingBrace).equals(closingBrace);
+    }
+
+    private void removeOpeningBraceFromTheStack() {
+        braces.pop();
+    }
+
+    private void addOpeningBraceToTheStack(char openingBrace) {
+        braces.push(openingBrace);
     }
 }

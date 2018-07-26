@@ -23,6 +23,8 @@ public class ArrayKataTest {
     @Test
     public void testMissingLetter() {
         assertEquals('e', ArrayKata.findMissingLetter(new char[] {'a', 'b', 'c', 'd', 'f'}));
-//        assertEquals('P', ArrayKata.findMissingLetter(new char[] {'O', 'Q', 'R', 'S'}));
+        assertEquals('P', ArrayKata.findMissingLetter(new char[] {'O', 'Q', 'R', 'S'}));
+        assertEquals('y', ArrayKata.findMissingLetter(new char[] {'w', 'x', 'z'}));
+        assertEquals('H', ArrayKata.findMissingLetter(new char[] {'G', 'I', 'J'}));
     }
 }

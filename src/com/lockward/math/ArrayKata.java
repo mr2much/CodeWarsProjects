@@ -3,10 +3,8 @@ package com.lockward.math;
 public class ArrayKata {
     private static String alphabet = "abcdefghijklmnopqrstuvwxyz";
     public static char findMissingLetter(char[] chars) {
-        String newAlphabet = alphabet;
-        if (Character.isUpperCase(chars[0]))
-            newAlphabet = alphabet.toUpperCase();
-
+        String newAlphabet = Character.isUpperCase(chars[0]) ? alphabet.toUpperCase() : alphabet;
+        
         int index = newAlphabet.indexOf(chars[0]);
 
         for (int i = 0; i < chars.length; i++) {

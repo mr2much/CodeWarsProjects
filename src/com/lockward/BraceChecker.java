@@ -9,7 +9,7 @@ import java.util.*;
 
 public class BraceChecker {
     private Map<Character, Character> validBraces;
-    private LinkedList<Character> braces;
+    private Stack<Character> braces;
 
     public BraceChecker() {
         validBraces = new HashMap<>();
@@ -19,33 +19,23 @@ public class BraceChecker {
     }
 
     public boolean isValid(String input) {
-        braces = new LinkedList<>();
+        braces = new Stack<>();
 
-        for (int i = 0; i < input.length(); i++) {
-            braces.add(input.charAt(i));
-        }
-
-        while (!braces.isEmpty()) {
-            char openingBrace = braces.pop();
-            char closingBrace;
-
-            if (validBraces.containsKey(openingBrace)) {
-                closingBrace = validBraces.get(openingBrace);
-
-                if(closingBrace == braces.peek()) {
+        for (char c : input.toCharArray()) {
+            if (braces.size() > 0 && !validBraces.containsKey(c)) {
+                if (isClosing(braces.peek(), c)) {
                     braces.pop();
-                } else if (closingBrace == braces.peekFirst()) {
-                    braces.pollFirst();
-                } else if (closingBrace == braces.peekLast()) {
-                    braces.pollLast();
-                } else {
-                    return false;
                 }
             } else {
-                return false;
+                braces.push(c);
             }
         }
 
         return braces.isEmpty();
+    }
+
+    private boolean isClosing(char openingBrace, char closingBrace) {
+        System.out.println("Comparing: " + openingBrace + "\t" + closingBrace);
+        return validBraces.get(openingBrace).equals(closingBrace);
     }
 }

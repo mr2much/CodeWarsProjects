@@ -31,6 +31,9 @@ public class BraceCheckerTest {
         assertTrue(checker.isValid("{}"));
         assertTrue(checker.isValid("(){}[]"));
         assertTrue(checker.isValid("([{}])"));
+        assertTrue(checker.isValid("({})[({})]"));
+        assertTrue(checker.isValid("(({{[[]]}}))"));
+        assertTrue(checker.isValid("((({{{[[[]]]]}}})))"));
     }
 
     @Test

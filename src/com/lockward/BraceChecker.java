@@ -5,36 +5,46 @@ Write a function that takes a string of braces, and determines if the order of t
 true if the string is valid, and false if it's invalid.
  */
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 public class BraceChecker {
     private Map<Character, Character> validBraces;
-    private Stack<Character> braces;
+    private LinkedList<Character> braces;
 
     public BraceChecker() {
         validBraces = new HashMap<>();
-        validBraces.put(')', '(');
-        validBraces.put(']', '[');
-        validBraces.put('}', '{');
+        validBraces.put('(', ')');
+        validBraces.put('[', ']');
+        validBraces.put('{', '}');
     }
 
     public boolean isValid(String input) {
-        braces = new Stack<>();
+        braces = new LinkedList<>();
+
         for (int i = 0; i < input.length(); i++) {
-            braces.push(input.charAt(i));
+            braces.add(input.charAt(i));
         }
 
         while (!braces.isEmpty()) {
-            char brace = braces.pop();
+            char openingBrace = braces.pop();
+            char closingBrace;
 
-            if (validBraces.containsKey(brace)) {
-                char doNothing = braces.pop();
-                System.out.println("Found: " + brace + "\t" + doNothing);
+            if (validBraces.containsKey(openingBrace)) {
+                closingBrace = validBraces.get(openingBrace);
+
+                if(closingBrace == braces.peek()) {
+                    braces.pop();
+                } else if (closingBrace == braces.peekFirst()) {
+                    braces.pollFirst();
+                } else if (closingBrace == braces.peekLast()) {
+                    braces.pollLast();
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
             }
         }
-
 
         return braces.isEmpty();
     }

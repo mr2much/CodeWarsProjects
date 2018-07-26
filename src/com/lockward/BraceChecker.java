@@ -21,7 +21,7 @@ public class BraceChecker {
 
     public boolean isValid(String input) {
         for (char c : input.toCharArray()) {
-            if (braces.size() > 0 && !validBraces.containsKey(c)) {
+            if (braces.size() > 0 && currentCharacterIsAClosingBrace(c)) {
                 if (checkIfCharacterIsMatchingClosingBrace(c)) {
                     removeOpeningBraceFromTheStack();
                 }
@@ -31,6 +31,10 @@ public class BraceChecker {
         }
 
         return braces.isEmpty();
+    }
+
+    private boolean currentCharacterIsAClosingBrace(char c) {
+        return !validBraces.containsKey(c);
     }
 
     private boolean checkIfCharacterIsMatchingClosingBrace(char closingBrace) {
